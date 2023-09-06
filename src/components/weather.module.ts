@@ -3,8 +3,6 @@ import { styled } from "styled-components";
 export const MainWrapper = styled.div`
   height: 120vh;
   background: linear-gradient(to top, #f0f8ff, #5f9ea0);
-  display: flex;
-  justify-content: space-evenly;
 
   .container {
     border: 1px solid rgb(219, 215, 215);
@@ -14,7 +12,7 @@ export const MainWrapper = styled.div`
     border-radius: 25px;
     box-shadow: 0 20px 25px #5f9ea0;
     background-blend-mode: overlay;
-    color: rgba(0, 0, 0, 0.8);
+    color: darkblue;
     margin-top: 100px;
     background-color: #ffffff7d;
     display: inline-block;
