@@ -3,32 +3,28 @@ import { styled } from "styled-components";
 export const MainWrapper = styled.div`
   height: 120vh;
   background: linear-gradient(to top, #f0f8ff, #5f9ea0);
-  display: block;
+  display: flex;
+  justify-content: space-evenly;
 
   .container {
-    display: block;
-    background-color: #ffffff7d;
+    border: 1px solid rgb(219, 215, 215);
+    width: 450px;
+    height: 850px;
+    padding: 2rem;
     border-radius: 25px;
-    padding: 1rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     box-shadow: 0 20px 25px #5f9ea0;
-    // box-sizing: border-box;
-    // color: rgba(0, 0, 0, 0.8);
-    // background-blend-mode: overlay;
-    // justify-content: space-between;
-    // align-items: center;
-    // flex-direction: column;
-    // position: absolute;
+    background-blend-mode: overlay;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 100px;
+    background-color: #ffffff7d;
+    display: inline-block;
   }
 
   .searchArea {
     margin-top: 20px;
     display: flex;
     justify-content: space-evenly;
-    // align-items: center;
+    align-items: center;
     width: 100%;
   }
 
@@ -42,6 +38,7 @@ export const MainWrapper = styled.div`
     width: 80%;
     background: transparent;
   }
+
   .searchCircle {
     border: 1px solid grey;
     width: 40px;
