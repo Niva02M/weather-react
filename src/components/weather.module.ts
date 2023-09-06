@@ -3,8 +3,10 @@ import { styled } from "styled-components";
 export const MainWrapper = styled.div`
   height: 120vh;
   background: linear-gradient(to top, #f0f8ff, #5f9ea0);
+  display: block;
 
   .container {
+    display: block;
     background-color: #ffffff7d;
     border-radius: 25px;
     padding: 1rem;
