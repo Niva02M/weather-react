@@ -3,8 +3,6 @@ import { styled } from "styled-components";
 export const MainWrapper = styled.div`
   height: 120vh;
   background: linear-gradient(to top, #f0f8ff, #5f9ea0);
-  display: flex;
-  justify-content: space-evenly;
 
   .container {
     border: 1px solid rgb(219, 215, 215);
@@ -14,7 +12,7 @@ export const MainWrapper = styled.div`
     border-radius: 25px;
     box-shadow: 0 20px 25px #5f9ea0;
     background-blend-mode: overlay;
-    color: rgba(0, 0, 0, 0.8);
+    color: darkblue;
     margin-top: 100px;
     background-color: #ffffff7d;
     display: inline-block;
@@ -72,7 +70,7 @@ export const MainWrapper = styled.div`
     }
 
     > span {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       font-family: "Inter", sans-serif;
       font-size: 2rem;
     }
@@ -89,10 +87,10 @@ export const MainWrapper = styled.div`
     align-items: center;
     justify-content: space-around;
     font-family: "Josefin Sans", sans-serif;
-    margin: 10px;
+    margin: 10px lightblue;
     background: linear-gradient(90deg, wheat 0%, lightblue 100%);
-    border-radius: 12px;
-    padding: 10px;
+    border-radius: 22px;
+    // padding: 2px;
   }
   .humidity,
   .wind {
@@ -106,7 +104,7 @@ export const MainWrapper = styled.div`
   }
 
   .windIcon {
-    font-size: 2rem;
+    font-size: 3rem;
     margin-right: 10px;
   }
 
