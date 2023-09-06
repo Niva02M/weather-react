@@ -31,6 +31,7 @@ interface weatherDataProps {
 }
 
 const DisplayWeather = () => {
+  // const api_key = process.env.REACT_APP_API_KEY;
   const api_key = "dd94f859a0e52d6e4767fddf735f04a7";
   const api_Endpoint = "https://api.openweathermap.org/data/2.5/";
 
@@ -39,6 +40,8 @@ const DisplayWeather = () => {
   );
 
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const [searchCity, setSearchCity] = React.useState("");
 
   const fetchWeather = async (lat: number, lon: number) => {
     const url = `${api_Endpoint}weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
@@ -49,6 +52,32 @@ const DisplayWeather = () => {
     // } catch (error) {
     //   console.error("Axios error:", error);
     // }
+  };
+
+  const fetchWeatherData = async (city: string) => {
+    try {
+      const url = `${api_Endpoint}weather?q=${city}&appid=${api_key}&units=metric}`;
+      const searchResponse = await axios.get(url);
+
+      const currentWeatherData: weatherDataProps = searchResponse.data;
+      return { currentWeatherData };
+    } catch (error) {
+      console.error("No data found");
+      throw error;
+    }
+  };
+
+  const handleSearch = async () => {
+    if (searchCity.trim() === "") {
+      return;
+    }
+
+    try {
+      const { currentWeatherData } = await fetchWeatherData(searchCity);
+      setWeatherData(currentWeatherData);
+    } catch (error) {
+      console.error("No Results Found");
+    }
   };
 
   const iconChanger = (weather: string) => {
@@ -105,9 +134,14 @@ const DisplayWeather = () => {
     <MainWrapper>
       <div className="container">
         <div className="searchArea">
-          <input type="text" placeholder="enter a city to search" />
+          <input
+            type="text"
+            placeholder="enter a city to search"
+            value={searchCity}
+            onChange={(e) => setSearchCity(e.target.value)}
+          />
           <div className="searchCircle">
-            <FaSearchLocation className="searchIcon" />
+            <FaSearchLocation className="searchIcon" onClick={handleSearch} />
           </div>
         </div>
 
