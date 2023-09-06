@@ -31,22 +31,24 @@ interface weatherDataProps {
 }
 
 const DisplayWeather = () => {
-  const api_key = "7f71772904c45011d7641e41e385c919";
+  const api_key = "01b2377034a83f88536f635e38ba54fc";
   const api_Endpoint = "https://api.openweathermap.org/data/2.5/";
 
   const [weatherData, setWeatherData] = React.useState<weatherDataProps | null>(
     null
   );
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const fetchWeather = async (lat: number, lon: number) => {
     const url = `${api_Endpoint}weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
 
-    try {
-      const response = await axios.get(url);
-      return response.data;
-    } catch (error) {
-      console.error("Axios error:", error);
-    }
+    // try {
+    const response = await axios.get(url);
+    return response.data;
+    // } catch (error) {
+    //   console.error("Axios error:", error);
+    // }
   };
 
   const iconChanger = (weather: string) => {
@@ -66,7 +68,7 @@ const DisplayWeather = () => {
 
       case "Clouds":
         iconElement = <BsCloudyFill />;
-        iconColor = "#102C57";
+        iconColor = "#5f9ea0";
         break;
 
       case "Mist":
@@ -92,6 +94,8 @@ const DisplayWeather = () => {
       Promise.all([fetchWeather(latitude, longitude)]).then(
         ([currentWeather]) => {
           setWeatherData(currentWeather);
+          setIsLoading(true);
+          console.log(currentWeather);
         }
       );
     });
@@ -107,7 +111,7 @@ const DisplayWeather = () => {
           </div>
         </div>
 
-        {weatherData && (
+        {weatherData && isLoading ? (
           <>
             <div className="weatherArea">
               <h1>{weatherData.name}</h1>
@@ -137,6 +141,11 @@ const DisplayWeather = () => {
               </div>
             </div>
           </>
+        ) : (
+          <div className="loading">
+            <RiLoaderFill className="loadingIcon" />
+            <p>Loading</p>
+          </div>
         )}
       </div>
     </MainWrapper>

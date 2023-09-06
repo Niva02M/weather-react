@@ -35,6 +35,7 @@ export const MainWrapper = styled.div`
     text-align: center;
     width: 80%;
     background: transparent;
+    font-size: 20px;
   }
 
   .searchCircle {
@@ -109,8 +110,8 @@ export const MainWrapper = styled.div`
   }
 
   .loading {
-    height: 400px;
-    width: 300px;
+    height: 500px;
+    // width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -129,12 +130,12 @@ export const MainWrapper = styled.div`
     }
   }
 
-  //   @keyframes spin {
-  //     from {
-  //       transform: rotate(0deg);
-  //     }
-  //     to {
-  //       transform: rotate(360deg);
-  //     }
-  //   }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
