@@ -15,11 +15,29 @@ import axios from "axios";
 
 const DisplayWeather = () => {
   const api_key = "7f71772904c45011d7641e41e385c919";
-  const api_Endpoint = "https://api.openweatherapp.prg/data/2.5/";
+  const api_Endpoint = "https://api.openweathermap.org/data/2.5/";
 
-  const fetchWeather = () => {
-    const url = `${api_Endpoint}`;
+  const fetchWeather = async (lat: number, lon: number) => {
+    const url = `${api_Endpoint}weather?lat=${lat}&lon=${lon}&appid=${api_key}&units =metric`;
+
+    try {
+      const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      console.error("Axios error:", error);
+    }
   };
+
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      Promise.all([fetchWeather(latitude, longitude)]).then(
+        ([currentWeather]) => {
+          console.log(currentWeather);
+        }
+      );
+    });
+  });
 
   return (
     <MainWrapper>
