@@ -31,8 +31,8 @@ interface weatherDataProps {
 }
 
 const DisplayWeather = () => {
-  // const api_key = process.env.REACT_APP_API_KEY;
-  const api_key = "7f71772904c45011d7641e41e385c919";
+  const api_key = process.env.REACT_APP_API_KEY;
+
   const api_Endpoint = "https://api.openweathermap.org/data/2.5/";
 
   const [weatherData, setWeatherData] = React.useState<weatherDataProps | null>(
@@ -43,24 +43,14 @@ const DisplayWeather = () => {
 
   const [searchCity, setSearchCity] = React.useState("");
 
-  const fetchWeather = async (lat: number, lon: number) => {
-    const url = `${api_Endpoint}weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
-
-    // try {
-    const response = await axios.get(url);
-    return response.data;
-    // } catch (error) {
-    //   console.error("Axios error:", error);
-    // }
-  };
-
   const fetchWeatherData = async (city: string) => {
     try {
       const url = `${api_Endpoint}weather?q=${city}&appid=${api_key}&units=metric}`;
       const searchResponse = await axios.get(url);
 
       const currentWeatherData: weatherDataProps = searchResponse.data;
-      return { currentWeatherData };
+      setWeatherData(currentWeatherData);
+      setIsLoading(true);
     } catch (error) {
       console.error("No data found");
       throw error;
@@ -73,8 +63,7 @@ const DisplayWeather = () => {
     }
 
     try {
-      const { currentWeatherData } = await fetchWeatherData(searchCity);
-      setWeatherData(currentWeatherData);
+      await fetchWeatherData(searchCity);
     } catch (error) {
       console.error("No Results Found");
     }
@@ -118,18 +107,9 @@ const DisplayWeather = () => {
   };
 
   React.useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      Promise.all([fetchWeather(latitude, longitude)]).then(
-        ([currentWeather]) => {
-          setWeatherData(currentWeather);
-          setIsLoading(true);
-          console.log(currentWeather);
-        }
-      );
-    });
-  });
-
+    fetchWeatherData("Kathmandu");
+  }, []);
+  console.log(weatherData, isLoading);
   return (
     <MainWrapper>
       <div className="container">
